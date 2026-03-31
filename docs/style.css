@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Full background image */
+header {
+    height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('/logo.jpg') no-repeat center center/cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Title styling */
+header h1 {
+    color: #fff;
+    font-size: 3rem;
+    padding: 15px 30px;
+    background: rgba(0, 150, 136, 0.8); /* contrast color */
+    border-radius: 10px;
+    letter-spacing: 2px;
+}
