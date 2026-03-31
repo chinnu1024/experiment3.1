@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'java'
 }
 
 repositories {
@@ -7,12 +8,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.31.0'
+    testImplementation 'org.testng:testng:7.11.0'
 }
 
 application {
     mainClass = 'org.example.Main'
 }
+
 // Task to copy HTML, CSS, JS, and images to 'docs' folder
 tasks.register('prepareDocs', Copy) {
     description = 'Copies HTML, CSS, JS, and images to the docs folder.'
@@ -23,4 +26,22 @@ tasks.register('prepareDocs', Copy) {
     }
 
     into("$rootDir/docs")
+}
+
+test {
+    useTestNG()
+}
+
+// Make an executable “fat” JAR including all dependencies
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.Main'
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
